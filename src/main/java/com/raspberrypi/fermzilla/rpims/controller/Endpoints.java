@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1")
 @CrossOrigin(origins = "*")
 public class Endpoints {
-    private PiInfo piInfo;
-
-    public Endpoints(PiInfo piInfo) {
-        this.piInfo = piInfo;
-    }
 
     @GetMapping("/temperature")
     public int showTemperature (PiInfo temp){
