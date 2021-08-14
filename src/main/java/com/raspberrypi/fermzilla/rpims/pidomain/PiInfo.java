@@ -1,14 +1,21 @@
 package com.raspberrypi.fermzilla.rpims.pidomain;
 
-import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-@Data
+
 @Controller
 public class PiInfo {
-    private int temperature;
+    private final Temperature piTempSensor;
 
-    public int getTemperature() {
-        return 25;
+    @Autowired
+    public PiInfo(Temperature piTempSensor) {
+        this.piTempSensor = piTempSensor;
     }
+
+    public double getTemp() {
+        double temp = piTempSensor.tempSensor();
+        return temp;
+    }
+
 }
