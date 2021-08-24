@@ -14,7 +14,7 @@ public class PiInfo {
     }
 
     public double getTemp() {
-        double temp = piTempSensor.tempSensor();
+        double temp = piTempSensor.fermzillaInnerTempSensor();
         return temp;
     }
 

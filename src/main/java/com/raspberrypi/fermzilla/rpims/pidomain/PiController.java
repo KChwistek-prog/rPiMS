@@ -5,19 +5,18 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class PiController {
-    private final Cooling cooling;
+    private final CoolerController coolerController;
 
     @Autowired
-    public PiController(Cooling cooling) {
-        this.cooling = cooling;
+    public PiController(CoolerController coolerController) {
+        this.coolerController = coolerController;
     }
 
-
     public void startCool() {
-        cooling.startCooling();
+        coolerController.startCooling();
     }
 
     public void stopCool(){
-        cooling.stopCooling();
+        coolerController.stopCooling();
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Temperature {
 
-    public double tempSensor() {
+    public double fermzillaInnerTempSensor() {
         double temperature = 0;
         W1Master w1Master = new W1Master();
         for (TemperatureSensor device : w1Master.getDevices(TemperatureSensor.class)) {
