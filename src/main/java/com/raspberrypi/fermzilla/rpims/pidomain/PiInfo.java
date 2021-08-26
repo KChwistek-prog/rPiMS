@@ -1,10 +1,11 @@
 package com.raspberrypi.fermzilla.rpims.pidomain;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 
-@Controller
+@Component
 public class PiInfo {
     private final Temperature piTempSensor;
 
@@ -14,8 +15,7 @@ public class PiInfo {
     }
 
     public double getTemp() {
-        double temp = piTempSensor.fermzillaInnerTempSensor();
-        return temp;
+        return piTempSensor.fermzillaInnerTempSensor();
     }
 
 }

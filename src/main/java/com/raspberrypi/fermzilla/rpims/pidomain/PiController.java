@@ -1,9 +1,9 @@
 package com.raspberrypi.fermzilla.rpims.pidomain;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
-@Controller
+@Component
 public class PiController {
     private final CoolerController coolerController;
 
