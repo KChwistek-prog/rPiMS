@@ -4,4 +4,4 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-rootProject.name = 'main'
+rootProject.name = 'rPiMS-Driver'
