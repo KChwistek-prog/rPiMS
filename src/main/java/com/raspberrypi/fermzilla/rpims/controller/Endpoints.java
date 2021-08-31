@@ -1,8 +1,8 @@
 package com.raspberrypi.fermzilla.rpims.controller;
 
+import com.raspberrypi.fermzilla.rpims.pidomain.CoolerController;
 import com.raspberrypi.fermzilla.rpims.pidomain.FermentationController;
-import com.raspberrypi.fermzilla.rpims.pidomain.PiController;
-import com.raspberrypi.fermzilla.rpims.pidomain.PiInfo;
+import com.raspberrypi.fermzilla.rpims.pidomain.SensorReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,35 +10,35 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1")
 @CrossOrigin(origins = "*")
 public class Endpoints {
-    private final PiInfo piInfo;
-    private final PiController piController;
+    private final SensorReader sensorReader;
+    private final CoolerController coolerController;
     private final FermentationController fermentationController;
 
     @Autowired
-    public Endpoints(PiInfo piInfo, PiController piController, FermentationController fermentationController) {
-        this.piInfo = piInfo;
-        this.piController = piController;
+    public Endpoints(SensorReader sensorReader, CoolerController coolerController, FermentationController fermentationController) {
+        this.sensorReader = sensorReader;
+        this.coolerController = coolerController;
         this.fermentationController = fermentationController;
     }
 
     @GetMapping("/temperature")
     public double showTemperature () {
-        return piInfo.getTemp();
+        return sensorReader.getTemp();
     }
 
     @PutMapping("/setTemp/{temp}")
     public void setTemperature(@PathVariable(value = "temp") int setTemp){
-        fermentationController.temperatureController(setTemp, piInfo.getTemp());
+        fermentationController.temperatureController(setTemp, sensorReader.getTemp());
     }
 
     @GetMapping("/startCooling")
-    public void startCooling(){
-        piController.startCool();
+    public void coolingOn(){
+        coolerController.startCooling();
     }
 
     @GetMapping("/stopCooling")
-    public void stopCooling(){
-        piController.stopCool();
+    public void coolingOff(){
+        coolerController.stopCooling();
     }
 
 

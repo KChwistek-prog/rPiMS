@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 public class FermentationController {
-    private final PiInfo piInfo;
+    private final SensorReader sensorReader;
     private final CoolerController coolerController;
     private int requestedTemperature;
 
     @Autowired
-    public FermentationController(PiInfo piInfo, CoolerController coolerController) {
-        this.piInfo = piInfo;
+    public FermentationController(SensorReader sensorReader, CoolerController coolerController) {
+        this.sensorReader = sensorReader;
         this.coolerController = coolerController;
     }
 

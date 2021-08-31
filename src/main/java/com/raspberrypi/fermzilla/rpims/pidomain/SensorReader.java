@@ -6,14 +6,16 @@ import com.pi4j.temperature.TemperatureScale;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Temperature {
+public class SensorReader {
 
-    public double fermzillaInnerTempSensor() {
+    public double getTemp() {
         double temperature = 0;
         W1Master w1Master = new W1Master();
         for (TemperatureSensor device : w1Master.getDevices(TemperatureSensor.class)) {
             temperature = device.getTemperature(TemperatureScale.CELSIUS);
         }
         return temperature;
+
     }
+
 }
