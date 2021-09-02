@@ -3,6 +3,7 @@ package com.raspberrypi.fermzilla.rpims.controller;
 import com.raspberrypi.fermzilla.rpims.pidomain.CoolerController;
 import com.raspberrypi.fermzilla.rpims.pidomain.FermentationController;
 import com.raspberrypi.fermzilla.rpims.pidomain.SensorReader;
+import com.raspberrypi.fermzilla.rpims.pidomain.SensorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,14 +22,15 @@ public class Endpoints {
         this.fermentationController = fermentationController;
     }
 
-    @GetMapping("/temperature")
-    public double showTemperature () {
-        return sensorReader.getTemp();
+    @GetMapping(value = "/temperature")
+    @ResponseBody
+    public SensorResponse showTemperature () {
+        return new SensorResponse(sensorReader.getTemp().getInnerTemperature());
     }
 
     @PutMapping("/setTemp/{temp}")
     public void setTemperature(@PathVariable(value = "temp") int setTemp){
-        fermentationController.temperatureController(setTemp, sensorReader.getTemp());
+        fermentationController.temperatureController(setTemp, sensorReader.getTemp().getInnerTemperature());
     }
 
     @GetMapping("/startCooling")

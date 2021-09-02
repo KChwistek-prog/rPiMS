@@ -1,7 +1,6 @@
 package com.raspberrypi.fermzilla.rpims.pidomain;
 
 import com.pi4j.io.gpio.*;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-
+DESTINATION="/Volumes/PiShare/"
+BUILDFILE="rPiMS-Driver-0.0.1-SNAPSHOT.jar"
 FILENAME="rPiMS.jar"
 BUILDPATH="build/libs"
+SSHADDRESS="pi@192.168.0.102"
 
 stopApp(){
   echo "Killing app"
-  ssh pi@192.168.0.101 "cd public; sh ./starter.sh stop"
+  ssh $SSHADDRESS "cd public; sh ./starter.sh stop"
   echo "RiP - $FILENAME"
 }
 
@@ -17,18 +19,18 @@ build_project(){
 
 rename_file(){
   echo "Renaming to $FILENAME"
-  cp $BUILDPATH/main-0.0.1-SNAPSHOT.jar $BUILDPATH/$FILENAME
+  cp $BUILDPATH/$BUILDFILE $BUILDPATH/$FILENAME
 }
 
 copy_file(){
   echo "Moving file to RaspberryPi"
-  mv $BUILDPATH/$FILENAME z:/
+  mv $BUILDPATH/$FILENAME $DESTINATION
   echo "Operation completed"
 }
 
 startApp(){
   echo "Starting App"
-  ssh pi@192.168.0.101 "cd public; sh ./starter.sh start"
+  ssh $SSHADDRESS "cd public; sh ./starter.sh start"
   echo "App started"
 }
 

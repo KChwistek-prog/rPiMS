@@ -8,14 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class SensorReader {
 
-    public double getTemp() {
-        double temperature = 0;
+    public SensorResponse getTemp() {
+        SensorResponse sensorResponse = new SensorResponse();
         W1Master w1Master = new W1Master();
-        for (TemperatureSensor device : w1Master.getDevices(TemperatureSensor.class)) {
-            temperature = device.getTemperature(TemperatureScale.CELSIUS);
+        for (TemperatureSensor rPi : w1Master.getDevices(TemperatureSensor.class)) {
+            sensorResponse.setInnerTemperature(rPi.getTemperature(TemperatureScale.CELSIUS));
         }
-        return temperature;
-
+        return sensorResponse;
     }
 
 }
