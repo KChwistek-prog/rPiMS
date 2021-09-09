@@ -1,8 +1,10 @@
 package com.raspberrypi.fermzilla.rpims.pidomain;
 
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@NoArgsConstructor
 public class SensorResponse {
     private Double innerTemperature;
 
@@ -16,8 +18,5 @@ public class SensorResponse {
 
     public SensorResponse(Double innerTemperature) {
         this.innerTemperature = innerTemperature;
-    }
-
-    public SensorResponse() {
     }
 }
