@@ -1,17 +1,29 @@
 package com.raspberrypi.fermzilla.rpims.pidomain;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@Getter
-@Setter
 public class FermentationController {
     private final SensorReader sensorReader;
     private final CoolerController coolerController;
     private int requestedTemperature;
+
+    public SensorReader getSensorReader() {
+        return sensorReader;
+    }
+
+    public CoolerController getCoolerController() {
+        return coolerController;
+    }
+
+    public int getRequestedTemperature() {
+        return requestedTemperature;
+    }
+
+    public void setRequestedTemperature(int requestedTemperature) {
+        this.requestedTemperature = requestedTemperature;
+    }
 
     @Autowired
     public FermentationController(SensorReader sensorReader, CoolerController coolerController) {
