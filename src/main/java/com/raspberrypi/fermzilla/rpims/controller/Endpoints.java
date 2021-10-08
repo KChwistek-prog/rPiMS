@@ -25,12 +25,12 @@ public class Endpoints {
     @GetMapping(value = "/temperature")
     @ResponseBody
     public SensorResponse showTemperature () {
-        return new SensorResponse(sensorReader.getTemp().getInnerTemperature());
+        return new SensorResponse(sensorReader.getTemp().getThermoWellTemp());
     }
 
     @PutMapping("/setTemp/{temp}")
     public void setTemperature(@PathVariable(value = "temp") int setTemp){
-        fermentationController.temperatureController(setTemp, sensorReader.getTemp().getInnerTemperature());
+        fermentationController.temperatureController(setTemp, sensorReader.getTemp().getThermoWellTemp());
     }
 
     @GetMapping("/startCooling")

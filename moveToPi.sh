@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-DESTINATION="/Volumes/PiShare/"
 BUILDFILE="rPiMS-Driver-0.0.1-SNAPSHOT.jar"
 FILENAME="rPiMS.jar"
 BUILDPATH="build/libs"
-SSHADDRESS="pi@192.168.0.102"
+SSHADDRESS="pi@192.168.0.105"
 
 stopApp(){
   echo "Killing app"
@@ -24,7 +23,7 @@ rename_file(){
 
 copy_file(){
   echo "Moving file to RaspberryPi"
-  mv $BUILDPATH/$FILENAME $DESTINATION
+  scp.exe build/libs/rPiMS.jar pi@192.168.0.105://home/pi/public
   echo "Operation completed"
 }
 

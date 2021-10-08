@@ -4,20 +4,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SensorResponse {
-    private Double innerTemperature;
+    private Double thermoWellTemp;
 
     public SensorResponse() {
     }
 
-    public Double getInnerTemperature() {
-        return innerTemperature;
+    public Double getThermoWellTemp() {
+        return thermoWellTemp;
     }
 
-    public void setInnerTemperature(Double innerTemperature) {
-        this.innerTemperature = innerTemperature;
+    public void setThermoWellTemp(Double thermoWellTemp) {
+        this.thermoWellTemp = thermoWellTemp;
     }
 
-    public SensorResponse(Double innerTemperature) {
-        this.innerTemperature = innerTemperature;
+    public SensorResponse(Double thermoWellTemp) {
+        this.thermoWellTemp = thermoWellTemp;
     }
 }
