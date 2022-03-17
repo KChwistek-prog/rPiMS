@@ -3,9 +3,11 @@ package com.raspberrypi.fermzilla.rpims.controller;
 import com.raspberrypi.fermzilla.rpims.pidomain.CoolerController;
 import com.raspberrypi.fermzilla.rpims.pidomain.FermentationController;
 import com.raspberrypi.fermzilla.rpims.pidomain.SensorReader;
-import com.raspberrypi.fermzilla.rpims.pidomain.SensorResponse;
+import com.raspberrypi.fermzilla.rpims.pidomain.SensorResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/v1")
@@ -24,13 +26,13 @@ public class Endpoints {
 
     @GetMapping(value = "/temperature")
     @ResponseBody
-    public SensorResponse showTemperature () {
-        return new SensorResponse(sensorReader.getTemp().getThermoWellTemp());
+    public SensorResponseDto showTemperature () throws IOException {
+        return new SensorResponseDto(sensorReader.getTemp().thermowellTemp(), sensorReader.getTemp().roomTemperature(), sensorReader.getTemp().setupPressure());
     }
 
     @PutMapping("/setTemp/{temp}")
-    public void setTemperature(@PathVariable(value = "temp") int setTemp){
-        fermentationController.temperatureController(setTemp, sensorReader.getTemp().getThermoWellTemp());
+    public void setTemperature(@PathVariable(value = "temp") int setTemp) throws IOException {
+        fermentationController.temperatureController(setTemp, sensorReader.getTemp().thermowellTemp());
     }
 
     @GetMapping("/startCooling")

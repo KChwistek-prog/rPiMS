@@ -1,21 +1,36 @@
 package com.raspberrypi.fermzilla.rpims.pidomain;
 
-import com.pi4j.component.temperature.TemperatureSensor;
-import com.pi4j.io.w1.W1Master;
-import com.pi4j.temperature.TemperatureScale;
 import org.springframework.stereotype.Component;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 @Component
 public class SensorReader {
 
+    public SensorResponseDto getTemp() throws IOException {
+        return new SensorResponseDto(thermowellTemperature(), roomTemperature(), checkPressure());
+    }
 
-    public SensorResponse getTemp() {
-        SensorResponse sensorResponse = new SensorResponse();
-        W1Master w1Master = new W1Master();
-        for (TemperatureSensor rPi : w1Master.getDevices(TemperatureSensor.class)) {
-            sensorResponse.setThermoWellTemp(rPi.getTemperature(TemperatureScale.CELSIUS));
-        }
-        return sensorResponse;
+    private Double thermowellTemperature() throws IOException {
+        String file = "/sys/bus/w1/devices/28-000000038e50/temperature";
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        var line = reader.readLine();
+        reader.close();
+        var temp = Double.parseDouble(line);
+        return temp / 1000;
+    }
+
+    private Double roomTemperature(){
+        //dummy method, waiting for sensor on rPi
+        return 23.2;
+    }
+
+    private Double checkPressure(){
+        //placeholder method, waiting for pressure transducer
+        return 1.0;
     }
 
 }
+
